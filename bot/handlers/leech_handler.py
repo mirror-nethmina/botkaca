@@ -113,7 +113,7 @@ async def progress_dl(message : Message, aria2_api : aria2.aria2, gid : int, pre
                     else:
                         block += LOCAL.BLOCK_EMPTY
                 text = LOCAL.ARIA2_DOWNLOAD_STATUS.format(
-                    name = download.name {mention},
+                    name = download.name '{mention}'
                     block = block,
                     percentage = download.progress_string(),
                     total_size = download.total_length_string(),
@@ -142,7 +142,7 @@ async def progress_dl(message : Message, aria2_api : aria2.aria2, gid : int, pre
         else:
             await message.edit(
                 LOCAL.ARIA2_DOWNLOAD_SUCCESS.format(
-                    name=download.name {mention}
+                    name=download.name '{mention}'
                 )
             )
             return True
@@ -154,7 +154,7 @@ async def progress_dl(message : Message, aria2_api : aria2.aria2, gid : int, pre
             download.remove(force=True)
             await message.edit(
                 LOCAL.ARIA2_DEAD_LINK.format(
-                    name = download.name {mention}
+                    name = download.name '{mention}'
                 )
             )
             return False
