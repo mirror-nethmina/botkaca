@@ -20,7 +20,7 @@ async def func(filepath: str, client: Client,  message: Message, delete=False):
         LOGGER.error(f'File not found : {filepath}')
         await message.edit_text(
             LOCAL.UPLOAD_FAILED_FILE_MISSING.format(
-                name = os_path.basename(filepath)
+                name = os_path.basename(filepath) {mention}
             )
         )
         return
@@ -30,7 +30,7 @@ async def func(filepath: str, client: Client,  message: Message, delete=False):
         async for filepath in ls:
             await message.edit(
                 LOCAL.UPLOADING_FILE.format(
-                    name = os_path.basename(filepath)
+                    name = os_path.basename(filepath) {mention}
                 )
             )
             await func(filepath, message, delete)
@@ -61,7 +61,7 @@ async def func(filepath: str, client: Client,  message: Message, delete=False):
 
             await message.edit(
                 LOCAL.GENERATE_THUMBNAIL.format(
-                    name = file.name
+                    name = file.name {mention}
                 )
             )
             thumbnail = os_path.join(CONFIG.ROOT, CONFIG.WORKDIR, CONFIG.THUMBNAIL_NAME)
@@ -87,14 +87,14 @@ async def func(filepath: str, client: Client,  message: Message, delete=False):
         LOGGER.debug(f'File too large : {filepath}')
         await message.edit_text(
             LOCAL.SPLIT_FILE.format(
-                name = os_path.basename(filepath)
+                name = os_path.basename(filepath) {mention}
             )
         )
 
     async for file in split.func(filepath, int(CONFIG.UPLOAD_MAX_SIZE)):
         await message.edit(
             LOCAL.UPLOADING_FILE.format(
-                name = file.name
+                name = file.name {mention}
             )
         )
     
